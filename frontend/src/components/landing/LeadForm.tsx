@@ -35,7 +35,7 @@ export function LeadForm() {
     setIsSubmitting(true)
     
     setTimeout(() => {
-      addLead(data)
+      addLead({ ...data, status: 'new' })
       setIsSubmitting(false)
       setIsSuccess(true)
       reset({
