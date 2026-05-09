@@ -5,6 +5,7 @@ export const leadFormSchema = z.object({
   whatsapp: z.string().min(10, 'WhatsApp deve ter pelo menos 10 dígitos'),
   instagram: z.string().optional(),
   email: z.string().email('E-mail inválido').optional().or(z.literal('')),
+  campaignId: z.string().optional(),
 })
 
 export type LeadFormData = z.infer<typeof leadFormSchema>

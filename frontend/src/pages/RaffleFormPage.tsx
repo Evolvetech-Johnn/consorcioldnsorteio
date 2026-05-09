@@ -3,12 +3,13 @@ import { motion } from 'framer-motion'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { leadFormSchema, type LeadFormData } from '../lib/validations'
-import { useAppStore, type AppState } from '../lib/store'
+import { useAppStore, type AppState, type Campaign } from '../lib/store'
 
 export function RaffleFormPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
   const addLead = useAppStore((state: AppState) => state.addLead)
+  const campaigns = useAppStore((state: AppState) => state.campaigns)
 
   const {
     register,
@@ -22,6 +23,7 @@ export function RaffleFormPage() {
       whatsapp: '',
       instagram: '',
       email: '',
+      campaignId: campaigns.length > 0 ? campaigns[0].id : '',
     },
   })
 
@@ -76,6 +78,24 @@ export function RaffleFormPage() {
             </div>
           ) : (
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+              {campaigns.length > 0 && (
+                <div>
+                  <label className="block text-sm font-semibold text-slate-700 mb-2">
+                    Campanha <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    {...register('campaignId')}
+                    className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 bg-slate-50 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:outline-none transition-all"
+                  >
+                    {campaigns.map((campaign: Campaign) => (
+                      <option key={campaign.id} value={campaign.id}>
+                        {campaign.title}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+              
               <div>
                 <label className="block text-sm font-semibold text-slate-700 mb-2">
                   Nome completo <span className="text-red-500">*</span>
