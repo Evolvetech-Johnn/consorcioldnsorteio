@@ -116,15 +116,16 @@ export function LeadsPage() {
               <tr className="border-b border-slate-200">
                 <th className="text-left py-3 px-4 text-sm font-semibold text-slate-600">Nome</th>
                 <th className="text-left py-3 px-4 text-sm font-semibold text-slate-600">WhatsApp</th>
+                <th className="text-left py-3 px-4 text-sm font-semibold text-slate-600 hidden md:table-cell">Instagram</th>
                 <th className="text-left py-3 px-4 text-sm font-semibold text-slate-600 hidden lg:table-cell">Campanha</th>
-                <th className="text-left py-3 px-4 text-sm font-semibold text-slate-600 hidden md:table-cell">Data</th>
+                <th className="text-left py-3 px-4 text-sm font-semibold text-slate-600 hidden xl:table-cell">Data</th>
                 <th className="text-right py-3 px-4 text-sm font-semibold text-slate-600">Ações</th>
               </tr>
             </thead>
             <tbody>
               {currentLeads.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="py-12 text-center text-slate-500">
+                  <td colSpan={6} className="py-12 text-center text-slate-500">
                     Nenhum lead encontrado
                   </td>
                 </tr>
@@ -149,10 +150,13 @@ export function LeadsPage() {
                       </div>
                     </td>
                     <td className="py-4 px-4 text-slate-700">{lead.whatsapp}</td>
+                    <td className="py-4 px-4 text-slate-700 hidden md:table-cell">
+                      {lead.instagram || '-'}
+                    </td>
                     <td className="py-4 px-4 text-slate-700 hidden lg:table-cell">
                       {getCampaignTitle(lead.campaignId)}
                     </td>
-                    <td className="py-4 px-4 text-slate-500 text-sm hidden md:table-cell">
+                    <td className="py-4 px-4 text-slate-500 text-sm hidden xl:table-cell">
                       {formatDate(lead.createdAt)}
                     </td>
                     <td className="py-4 px-4 text-right">

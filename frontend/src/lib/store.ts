@@ -31,7 +31,7 @@ export interface Raffle {
   createdAt: string
 }
 
-interface AppState {
+export interface AppState {
   leads: Lead[]
   campaigns: Campaign[]
   raffles: Raffle[]

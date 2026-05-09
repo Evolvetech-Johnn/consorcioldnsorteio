@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useAppStore, type Lead, type Campaign, type Raffle, type AppState } from '../../lib/store'
+import { useAppStore, type Lead, type Campaign, type AppState } from '../../lib/store'
 
 export function RafflePage() {
   const [selectedCampaign, setSelectedCampaign] = useState('')

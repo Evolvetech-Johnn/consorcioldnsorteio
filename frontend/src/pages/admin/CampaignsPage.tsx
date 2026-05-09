@@ -49,7 +49,7 @@ export function CampaignsPage() {
   }
 
   const handleEdit = (campaignId: string) => {
-    const campaign = campaigns.find((c) => c.id === campaignId)
+    const campaign = campaigns.find((c: Campaign) => c.id === campaignId)
     if (campaign) {
       setEditingCampaign(campaignId)
       reset({
@@ -63,7 +63,7 @@ export function CampaignsPage() {
   }
 
   const toggleActive = (campaignId: string) => {
-    const campaign = campaigns.find((c) => c.id === campaignId)
+    const campaign = campaigns.find((c: Campaign) => c.id === campaignId)
     if (campaign) {
       updateCampaign(campaignId, { active: !campaign.active })
     }

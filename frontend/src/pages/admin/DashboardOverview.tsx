@@ -73,12 +73,12 @@ export function DashboardOverview() {
   return (
     <div className="space-y-8">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {stats.map((stat, index) => (
+        {stats.map((stat) => (
           <motion.div
-            key={index}
+            key={stat.label}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            transition={{ duration: 0.5, delay: stats.indexOf(stat) * 0.1 }}
             className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-all"
           >
             <div className="flex items-center justify-between mb-4">
@@ -114,7 +114,7 @@ export function DashboardOverview() {
             {recentLeads.length === 0 ? (
               <p className="text-center text-slate-500 py-8">Nenhum lead cadastrado ainda</p>
             ) : (
-              recentLeads.map((lead, index) => (
+              recentLeads.map((lead) => (
                 <div key={lead.id} className="flex items-center justify-between p-4 bg-slate-50 rounded-xl">
                   <div className="flex items-center gap-4">
                     <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-emerald-500 rounded-full flex items-center justify-center text-white font-bold">
