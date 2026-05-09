@@ -1,18 +1,22 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { leadFormSchema, type LeadFormData } from '../../lib/validations'
+import { useAppStore, type AppState, type Campaign } from '../../lib/store'
 
 export function LeadForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const addLead = useAppStore((state: AppState) => state.addLead)
+  const campaigns = useAppStore((state: AppState) => state.campaigns)
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm<LeadFormData>({
     resolver: zodResolver(leadFormSchema),
     defaultValues: {
@@ -20,14 +24,21 @@ export function LeadForm() {
       whatsapp: '',
       instagram: '',
       email: '',
+      campaignId: '',
     },
   })
+
+  useEffect(() => {
+    if (campaigns.length > 0) {
+      setValue('campaignId', campaigns[0].id)
+    }
+  }, [campaigns, setValue])
 
   const onSubmit = async (data: LeadFormData) => {
     setIsSubmitting(true)
     
     setTimeout(() => {
-      console.log('Dados do formulário:', data)
+      addLead(data)
       setIsSubmitting(false)
       setIsSuccess(true)
       reset()
@@ -83,6 +94,24 @@ export function LeadForm() {
           ) : (
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
+                {campaigns.length > 0 && (
+                  <div className="md:col-span-2">
+                    <label className="block text-sm font-semibold text-slate-700 mb-2">
+                      Campanha <span className="text-red-500">*</span>
+                    </label>
+                    <select
+                      {...register('campaignId')}
+                      className="w-full px-4 py-3 rounded-xl border-2 border-slate-200 bg-slate-50 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:outline-none transition-all"
+                    >
+                      {campaigns.map((campaign: Campaign) => (
+                        <option key={campaign.id} value={campaign.id}>
+                          {campaign.title}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+                
                 <div className="md:col-span-2">
                   <label className="block text-sm font-semibold text-slate-700 mb-2">
                     Nome completo <span className="text-red-500">*</span>

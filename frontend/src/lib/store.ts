@@ -1,6 +1,8 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 
+export type LeadStatus = 'new' | 'contacted' | 'converted' | 'spam'
+
 export interface Lead {
   id: string
   fullName: string
@@ -9,6 +11,7 @@ export interface Lead {
   email?: string
   campaignId?: string
   consultantId?: string
+  status: LeadStatus
   createdAt: string
 }
 
@@ -54,6 +57,7 @@ export const useAppStore = create<AppState>()(
           whatsapp: '(11) 98765-4321',
           instagram: '@joaosilva',
           email: 'joao@email.com',
+          status: 'new' as LeadStatus,
           createdAt: new Date().toISOString()
         },
         {
@@ -61,6 +65,7 @@ export const useAppStore = create<AppState>()(
           fullName: 'Maria Santos',
           whatsapp: '(21) 99876-5432',
           instagram: '@mariasantos',
+          status: 'contacted' as LeadStatus,
           createdAt: new Date().toISOString()
         },
         {
@@ -68,6 +73,7 @@ export const useAppStore = create<AppState>()(
           fullName: 'Pedro Oliveira',
           whatsapp: '(31) 91234-5678',
           email: 'pedro@email.com',
+          status: 'converted' as LeadStatus,
           createdAt: new Date().toISOString()
         }
       ],
@@ -89,6 +95,7 @@ export const useAppStore = create<AppState>()(
             {
               ...lead,
               id: Date.now().toString(),
+              status: 'new' as LeadStatus,
               createdAt: new Date().toISOString()
             }
           ]

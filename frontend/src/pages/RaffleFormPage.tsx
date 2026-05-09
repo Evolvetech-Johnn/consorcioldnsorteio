@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -16,6 +16,7 @@ export function RaffleFormPage() {
     handleSubmit,
     formState: { errors },
     reset,
+    setValue,
   } = useForm<LeadFormData>({
     resolver: zodResolver(leadFormSchema),
     defaultValues: {
@@ -23,9 +24,15 @@ export function RaffleFormPage() {
       whatsapp: '',
       instagram: '',
       email: '',
-      campaignId: campaigns.length > 0 ? campaigns[0].id : '',
+      campaignId: '',
     },
   })
+
+  useEffect(() => {
+    if (campaigns.length > 0) {
+      setValue('campaignId', campaigns[0].id)
+    }
+  }, [campaigns, setValue])
 
   const onSubmit = async (data: LeadFormData) => {
     setIsSubmitting(true)
