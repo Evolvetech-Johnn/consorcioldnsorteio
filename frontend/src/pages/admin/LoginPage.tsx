@@ -27,7 +27,12 @@ export function LoginPage() {
     setTimeout(() => {
       console.log('Login data:', data)
       setIsSubmitting(false)
-      navigate('/admin')
+      
+      if (data.email === 'admin@consorciouniao.com.br' && data.password === 'Admin@123') {
+        navigate('/admin')
+      } else {
+        alert('Credenciais inválidas! Use: admin@consorciouniao.com.br / Admin@123')
+      }
     }, 1500)
   }
 
@@ -47,6 +52,12 @@ export function LoginPage() {
           </div>
           <h1 className="text-3xl font-bold text-white mb-2">Consórcio União</h1>
           <p className="text-slate-400">Acesse o painel administrativo</p>
+          
+          <div className="mt-6 p-4 bg-slate-800/50 rounded-xl border border-slate-700/50">
+            <p className="text-xs text-slate-400 mb-2">Credenciais de demonstração:</p>
+            <p className="text-sm text-white font-mono">E-mail: admin@consorciouniao.com.br</p>
+            <p className="text-sm text-white font-mono">Senha: Admin@123</p>
+          </div>
         </div>
 
         <div className="bg-white rounded-3xl p-8 shadow-2xl">
