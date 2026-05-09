@@ -22,16 +22,29 @@ export function HeroSection() {
             </div>
 
             <h1 className="text-4xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-              Ganhe um
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
-                {' '}Consórcio Premium
+                SORTEIO ESPECIAL
               </span>
             </h1>
 
             <p className="text-xl text-slate-300 mb-8 leading-relaxed">
-              Participe do nosso sorteio de hoje e tenha a chance de conquistar o seu consórcio sem mensalidades.
-              É simples, rápido e totalmente gratuito!
+              Participe do nosso sorteio de hoje e tenha a chance de ganhar:
             </p>
+
+            <div className="mb-8 space-y-3">
+              <div className="flex items-center gap-3 text-white text-lg">
+                <div className="w-2 h-2 bg-emerald-400 rounded-full" />
+                <span>1 Voucher de R$150 em combustível</span>
+              </div>
+              <div className="flex items-center gap-3 text-white text-lg">
+                <div className="w-2 h-2 bg-emerald-400 rounded-full" />
+                <span>2 Garrafas térmicas de 500ml</span>
+              </div>
+              <div className="flex items-center gap-3 text-white text-lg">
+                <div className="w-2 h-2 bg-emerald-400 rounded-full" />
+                <span>1 Bolsa térmica de 5 litros</span>
+              </div>
+            </div>
 
             <div className="flex flex-wrap gap-4">
               <motion.div
@@ -48,20 +61,6 @@ export function HeroSection() {
                   </svg>
                 </Link>
               </motion.div>
-
-              <div className="flex items-center gap-3 text-slate-300">
-                <div className="flex -space-x-3">
-                  {[1, 2, 3].map((i) => (
-                    <div key={i} className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-slate-900 flex items-center justify-center text-white text-xs font-bold">
-                      {String.fromCharCode(64 + i)}
-                    </div>
-                  ))}
-                </div>
-                <div>
-                  <p className="font-semibold text-white">+1.200 participantes</p>
-                  <p className="text-sm text-slate-400">Já estão concorrendo</p>
-                </div>
-              </div>
             </div>
           </motion.div>
 
@@ -78,8 +77,8 @@ export function HeroSection() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <p className="text-5xl font-bold text-white mb-2">R$ 50.000</p>
-                <p className="text-slate-300 text-lg">Prêmio do sorteio</p>
+                <p className="text-3xl font-bold text-white mb-2">Prêmios Incríveis</p>
+                <p className="text-slate-300 text-lg">Não perca essa chance!</p>
                 <div className="mt-6 pt-6 border-t border-white/20">
                   <p className="text-sm text-slate-400">Data do sorteio</p>
                   <p className="text-xl font-semibold text-white">09 de Maio de 2026</p>
