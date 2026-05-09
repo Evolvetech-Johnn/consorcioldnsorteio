@@ -16,6 +16,16 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: false,
-    minify: 'terser',
+    minify: 'esbuild',
+    target: 'esnext',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          forms: ['react-hook-form', '@hookform/resolvers', 'zod'],
+          ui: ['framer-motion', 'clsx', 'date-fns'],
+        },
+      },
+    },
   },
 })
