@@ -1,12 +1,11 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { useAppStore, type Lead } from '../../lib/store'
+import { useAppStore, type AppState, type Lead, type Campaign } from '../../lib/store'
 
 export function LeadsPage() {
-  const leads = useAppStore((state) => state.leads)
-  const campaigns = useAppStore((state) => state.campaigns)
-  const deleteLead = useAppStore((state) => state.deleteLead)
-  const updateLead = useAppStore((state) => state.updateLead)
+  const leads = useAppStore((state: AppState) => state.leads)
+  const campaigns = useAppStore((state: AppState) => state.campaigns)
+  const deleteLead = useAppStore((state: AppState) => state.deleteLead)
   
   const [searchTerm, setSearchTerm] = useState('')
   const [filterCampaign, setFilterCampaign] = useState('')
@@ -15,11 +14,11 @@ export function LeadsPage() {
 
   const getCampaignTitle = (campaignId?: string) => {
     if (!campaignId) return '-'
-    const campaign = campaigns.find((c) => c.id === campaignId)
+    const campaign = campaigns.find((c: Campaign) => c.id === campaignId)
     return campaign?.title || '-'
   }
 
-  const filteredLeads = leads.filter((lead) => {
+  const filteredLeads = leads.filter((lead: Lead) => {
     const matchesSearch = 
       lead.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       lead.whatsapp.includes(searchTerm) ||
@@ -48,7 +47,7 @@ export function LeadsPage() {
     const headers = ['Nome', 'WhatsApp', 'Instagram', 'E-mail', 'Campanha', 'Data']
     const csvContent = [
       headers.join(','),
-      ...filteredLeads.map(lead => [
+      ...filteredLeads.map((lead: Lead) => [
         `"${lead.fullName}"`,
         lead.whatsapp,
         lead.instagram || '',
@@ -103,7 +102,7 @@ export function LeadsPage() {
             className="px-4 py-2 border border-slate-200 rounded-xl bg-slate-50 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 focus:outline-none transition-all"
           >
             <option value="">Todas as campanhas</option>
-            {campaigns.map((campaign) => (
+            {campaigns.map((campaign: Campaign) => (
               <option key={campaign.id} value={campaign.id}>
                 {campaign.title}
               </option>
@@ -130,7 +129,7 @@ export function LeadsPage() {
                   </td>
                 </tr>
               ) : (
-                currentLeads.map((lead, index) => (
+                currentLeads.map((lead: Lead, index: number) => (
                   <motion.tr
                     key={lead.id}
                     initial={{ opacity: 0, x: -20 }}

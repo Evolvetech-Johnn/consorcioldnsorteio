@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { useAppStore } from '../../lib/store'
+import { useAppStore, type AppState, type Lead, type Campaign } from '../../lib/store'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -15,11 +15,11 @@ const campaignSchema = z.object({
 type CampaignFormData = z.infer<typeof campaignSchema>
 
 export function CampaignsPage() {
-  const campaigns = useAppStore((state) => state.campaigns)
-  const leads = useAppStore((state) => state.leads)
-  const addCampaign = useAppStore((state) => state.addCampaign)
-  const updateCampaign = useAppStore((state) => state.updateCampaign)
-  const deleteCampaign = useAppStore((state) => state.deleteCampaign)
+  const campaigns = useAppStore((state: AppState) => state.campaigns)
+  const leads = useAppStore((state: AppState) => state.leads)
+  const addCampaign = useAppStore((state: AppState) => state.addCampaign)
+  const updateCampaign = useAppStore((state: AppState) => state.updateCampaign)
+  const deleteCampaign = useAppStore((state: AppState) => state.deleteCampaign)
   
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [editingCampaign, setEditingCampaign] = useState<string | null>(null)
@@ -34,7 +34,7 @@ export function CampaignsPage() {
   })
 
   const getLeadsCount = (campaignId: string) => {
-    return leads.filter((l) => l.campaignId === campaignId).length
+    return leads.filter((l: Lead) => l.campaignId === campaignId).length
   }
 
   const onSubmit = (data: CampaignFormData) => {
@@ -92,7 +92,7 @@ export function CampaignsPage() {
       </div>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {campaigns.map((campaign, index) => (
+        {campaigns.map((campaign: Campaign, index: number) => (
           <motion.div
             key={campaign.id}
             initial={{ opacity: 0, y: 20 }}

@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion'
-import { useAppStore } from '../../lib/store'
+import { useAppStore, type AppState } from '../../lib/store'
 import { Link } from 'react-router-dom'
 
 export function DashboardOverview() {
-  const leads = useAppStore((state) => state.leads)
-  const campaigns = useAppStore((state) => state.campaigns)
-  const raffles = useAppStore((state) => state.raffles)
+  const leads = useAppStore((state: AppState) => state.leads)
+  const campaigns = useAppStore((state: AppState) => state.campaigns)
+  const raffles = useAppStore((state: AppState) => state.raffles)
 
   const stats = [
     {

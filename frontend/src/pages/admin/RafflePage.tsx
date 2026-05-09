@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useAppStore, type Lead } from '../../lib/store'
+import { useAppStore, type Lead, type Campaign, type Raffle, type AppState } from '../../lib/store'
 
 export function RafflePage() {
   const [selectedCampaign, setSelectedCampaign] = useState('')
@@ -9,14 +9,14 @@ export function RafflePage() {
   const [currentName, setCurrentName] = useState('')
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
   
-  const campaigns = useAppStore((state) => state.campaigns)
-  const leads = useAppStore((state) => state.leads)
-  const raffles = useAppStore((state) => state.raffles)
-  const addRaffle = useAppStore((state) => state.addRaffle)
+  const campaigns = useAppStore((state: AppState) => state.campaigns)
+  const leads = useAppStore((state: AppState) => state.leads)
+  const raffles = useAppStore((state: AppState) => state.raffles)
+  const addRaffle = useAppStore((state: AppState) => state.addRaffle)
 
   const getLeadsForCampaign = (campaignId: string) => {
     if (!campaignId) return leads
-    return leads.filter((l) => l.campaignId === campaignId)
+    return leads.filter((l: Lead) => l.campaignId === campaignId)
   }
 
   const formatDate = (dateString: string) => {
@@ -31,20 +31,14 @@ export function RafflePage() {
 
   const getCampaignTitle = (campaignId?: string) => {
     if (!campaignId) return '-'
-    const campaign = campaigns.find((c) => c.id === campaignId)
+    const campaign = campaigns.find((c: Campaign) => c.id === campaignId)
     return campaign?.title || '-'
   }
 
   const getWinnerName = (winnerLeadId?: string) => {
     if (!winnerLeadId) return '-'
-    const lead = leads.find((l) => l.id === winnerLeadId)
+    const lead = leads.find((l: Lead) => l.id === winnerLeadId)
     return lead?.fullName || '-'
-  }
-
-  const getWinnerWhatsapp = (winnerLeadId?: string) => {
-    if (!winnerLeadId) return '-'
-    const lead = leads.find((l) => l.id === winnerLeadId)
-    return lead?.whatsapp || '-'
   }
 
   const startRaffle = () => {
@@ -109,7 +103,7 @@ export function RafflePage() {
                 disabled={isRaffling}
               >
                 <option value="">Escolha uma campanha</option>
-                {campaigns.map(campaign => (
+                {campaigns.map((campaign: Campaign) => (
                   <option key={campaign.id} value={campaign.id}>
                     {campaign.title} ({getLeadsForCampaign(campaign.id).length} leads)
                   </option>
