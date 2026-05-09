@@ -24,9 +24,20 @@ export function createApp(): Express {
   app.use(express.urlencoded({ limit: '10mb', extended: true }))
 
   // CORS middleware
+  const allowedOrigins = [
+    config.cors.origin,
+    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined,
+  ].filter(Boolean) as string[]
+
   app.use(
     cors({
-      origin: config.cors.origin,
+      origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+          callback(null, true)
+        } else {
+          callback(new Error('Not allowed by CORS'))
+        }
+      },
       credentials: true,
       methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization'],

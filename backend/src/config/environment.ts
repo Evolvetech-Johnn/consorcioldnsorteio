@@ -12,6 +12,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 dotenv.config({ path: path.join(__dirname, '../../.env') })
+dotenv.config({ path: path.join(__dirname, '../../../.env') })
 
 const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
@@ -21,6 +22,7 @@ const envSchema = z.object({
   BCRYPT_SALT_ROUNDS: z.string().default('12'),
   CORS_ORIGIN: z.string().default('http://localhost:5173'),
   API_URL: z.string().default('http://localhost:5000'),
+  VERCEL_URL: z.string().optional(),
 })
 
 const env = envSchema.parse(process.env)
