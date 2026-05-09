@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -11,12 +11,15 @@ export function LeadForm() {
   const addLead = useAppStore((state: AppState) => state.addLead)
   const campaigns = useAppStore((state: AppState) => state.campaigns)
 
+  const getDefaultCampaignId = () => {
+    return campaigns.length > 0 ? campaigns[0].id : ''
+  }
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-    setValue,
   } = useForm<LeadFormData>({
     resolver: zodResolver(leadFormSchema),
     defaultValues: {
@@ -24,15 +27,9 @@ export function LeadForm() {
       whatsapp: '',
       instagram: '',
       email: '',
-      campaignId: '',
+      campaignId: getDefaultCampaignId(),
     },
   })
-
-  useEffect(() => {
-    if (campaigns.length > 0) {
-      setValue('campaignId', campaigns[0].id)
-    }
-  }, [campaigns, setValue])
 
   const onSubmit = async (data: LeadFormData) => {
     setIsSubmitting(true)
@@ -41,7 +38,13 @@ export function LeadForm() {
       addLead(data)
       setIsSubmitting(false)
       setIsSuccess(true)
-      reset()
+      reset({
+        fullName: '',
+        whatsapp: '',
+        instagram: '',
+        email: '',
+        campaignId: getDefaultCampaignId(),
+      })
       
       setTimeout(() => {
         setIsSuccess(false)
@@ -92,7 +95,7 @@ export function LeadForm() {
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <form key={campaigns.length} onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 {campaigns.length > 0 && (
                   <div className="md:col-span-2">
