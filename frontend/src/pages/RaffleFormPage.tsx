@@ -3,10 +3,12 @@ import { motion } from 'framer-motion'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { leadFormSchema, type LeadFormData } from '../lib/validations'
+import { useAppStore } from '../lib/store'
 
 export function RaffleFormPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
+  const addLead = useAppStore((state) => state.addLead)
 
   const {
     register,
@@ -27,7 +29,7 @@ export function RaffleFormPage() {
     setIsSubmitting(true)
     
     setTimeout(() => {
-      console.log('Dados do formulário:', data)
+      addLead(data)
       setIsSubmitting(false)
       setIsSuccess(true)
       reset()

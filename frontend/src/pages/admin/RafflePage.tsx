@@ -1,45 +1,55 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-
-const mockCampaigns = [
-  {
-    id: '1',
-    title: 'Sorteio Premium 2026',
-    leadsCount: 854,
-  },
-  {
-    id: '2',
-    title: 'Sorteio de Verão',
-    leadsCount: 320,
-  },
-  {
-    id: '3',
-    title: 'Sorteio Especial',
-    leadsCount: 510,
-  },
-]
-
-const mockLeads = [
-  { id: '1', fullName: 'João da Silva', whatsapp: '(11) 98765-4321' },
-  { id: '2', fullName: 'Maria Santos', whatsapp: '(11) 91234-5678' },
-  { id: '3', fullName: 'Pedro Costa', whatsapp: '(11) 99876-5432' },
-  { id: '4', fullName: 'Ana Oliveira', whatsapp: '(11) 94567-8901' },
-  { id: '5', fullName: 'Lucas Almeida', whatsapp: '(11) 93456-7890' },
-  { id: '6', fullName: 'Carla Souza', whatsapp: '(11) 92345-6789' },
-  { id: '7', fullName: 'Fernanda Lima', whatsapp: '(11) 91111-2222' },
-  { id: '8', fullName: 'Ricardo Mendes', whatsapp: '(11) 98888-7777' },
-]
+import { useAppStore, type Lead } from '../../lib/store'
 
 export function RafflePage() {
   const [selectedCampaign, setSelectedCampaign] = useState('')
   const [isRaffling, setIsRaffling] = useState(false)
-  const [winner, setWinner] = useState<any>(null)
+  const [winner, setWinner] = useState<Lead | null>(null)
   const [currentName, setCurrentName] = useState('')
-  const [history, setHistory] = useState<any[]>([])
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
+  
+  const campaigns = useAppStore((state) => state.campaigns)
+  const leads = useAppStore((state) => state.leads)
+  const raffles = useAppStore((state) => state.raffles)
+  const addRaffle = useAppStore((state) => state.addRaffle)
+
+  const getLeadsForCampaign = (campaignId: string) => {
+    if (!campaignId) return leads
+    return leads.filter((l) => l.campaignId === campaignId)
+  }
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleString('pt-BR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    })
+  }
+
+  const getCampaignTitle = (campaignId?: string) => {
+    if (!campaignId) return '-'
+    const campaign = campaigns.find((c) => c.id === campaignId)
+    return campaign?.title || '-'
+  }
+
+  const getWinnerName = (winnerLeadId?: string) => {
+    if (!winnerLeadId) return '-'
+    const lead = leads.find((l) => l.id === winnerLeadId)
+    return lead?.fullName || '-'
+  }
+
+  const getWinnerWhatsapp = (winnerLeadId?: string) => {
+    if (!winnerLeadId) return '-'
+    const lead = leads.find((l) => l.id === winnerLeadId)
+    return lead?.whatsapp || '-'
+  }
 
   const startRaffle = () => {
-    if (!selectedCampaign) return
+    const candidates = getLeadsForCampaign(selectedCampaign)
+    if (!selectedCampaign || candidates.length === 0) return
     
     setIsRaffling(true)
     setWinner(null)
@@ -48,28 +58,24 @@ export function RafflePage() {
     const maxIterations = 30
     
     intervalRef.current = setInterval(() => {
-      const randomIndex = Math.floor(Math.random() * mockLeads.length)
-      setCurrentName(mockLeads[randomIndex].fullName)
+      const randomIndex = Math.floor(Math.random() * candidates.length)
+      setCurrentName(candidates[randomIndex].fullName)
       count++
       
       if (count >= maxIterations) {
         if (intervalRef.current) clearInterval(intervalRef.current)
         
-        const finalIndex = Math.floor(Math.random() * mockLeads.length)
-        const finalWinner = mockLeads[finalIndex]
+        const finalIndex = Math.floor(Math.random() * candidates.length)
+        const finalWinner = candidates[finalIndex]
         setWinner(finalWinner)
         setCurrentName(finalWinner.fullName)
         setIsRaffling(false)
         
-        setHistory(prev => [
-          {
-            id: Date.now().toString(),
-            campaign: mockCampaigns.find(c => c.id === selectedCampaign)?.title,
-            winner: finalWinner,
-            date: new Date().toLocaleString('pt-BR'),
-          },
-          ...prev,
-        ])
+        addRaffle({
+          title: `Sorteio - ${new Date().toLocaleDateString('pt-BR')}`,
+          campaignId: selectedCampaign,
+          winnerLeadId: finalWinner.id
+        })
       }
     }, 100)
   }
@@ -79,6 +85,8 @@ export function RafflePage() {
       if (intervalRef.current) clearInterval(intervalRef.current)
     }
   }, [])
+
+  const candidates = getLeadsForCampaign(selectedCampaign)
 
   return (
     <div className="space-y-6">
@@ -101,9 +109,9 @@ export function RafflePage() {
                 disabled={isRaffling}
               >
                 <option value="">Escolha uma campanha</option>
-                {mockCampaigns.map(campaign => (
+                {campaigns.map(campaign => (
                   <option key={campaign.id} value={campaign.id}>
-                    {campaign.title} ({campaign.leadsCount} leads)
+                    {campaign.title} ({getLeadsForCampaign(campaign.id).length} leads)
                   </option>
                 ))}
               </select>
@@ -160,9 +168,9 @@ export function RafflePage() {
             <div className="flex justify-center">
               <button
                 onClick={startRaffle}
-                disabled={!selectedCampaign || isRaffling}
+                disabled={!selectedCampaign || isRaffling || candidates.length === 0}
                 className={`px-8 py-4 rounded-xl font-bold text-lg flex items-center gap-3 transition-all ${
-                  !selectedCampaign || isRaffling
+                  !selectedCampaign || isRaffling || candidates.length === 0
                     ? 'bg-slate-200 text-slate-400 cursor-not-allowed'
                     : 'bg-gradient-to-r from-blue-600 to-emerald-600 text-white shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:scale-105'
                 }`}
@@ -192,7 +200,7 @@ export function RafflePage() {
           <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
             <h3 className="text-lg font-bold text-slate-900 mb-4">Histórico de Sorteios</h3>
             
-            {history.length === 0 ? (
+            {raffles.length === 0 ? (
               <div className="text-center py-8 text-slate-500">
                 <svg className="w-12 h-12 mx-auto mb-3 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -201,7 +209,9 @@ export function RafflePage() {
               </div>
             ) : (
               <div className="space-y-3 max-h-96 overflow-y-auto">
-                {history.map((item, index) => (
+                {[...raffles].sort((a, b) => 
+                  new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+                ).map((item, index) => (
                   <motion.div
                     key={item.id}
                     initial={{ opacity: 0, x: 20 }}
@@ -214,9 +224,9 @@ export function RafflePage() {
                         Vencedor
                       </span>
                     </div>
-                    <p className="font-semibold text-slate-900">{item.winner.fullName}</p>
-                    <p className="text-sm text-slate-500">{item.campaign}</p>
-                    <p className="text-xs text-slate-400 mt-1">{item.date}</p>
+                    <p className="font-semibold text-slate-900">{getWinnerName(item.winnerLeadId)}</p>
+                    <p className="text-sm text-slate-500">{getCampaignTitle(item.campaignId)}</p>
+                    <p className="text-xs text-slate-400 mt-1">{formatDate(item.createdAt)}</p>
                   </motion.div>
                 ))}
               </div>
