@@ -5,16 +5,12 @@
 
 import config from './config/environment.js'
 import { createApp } from './app.js'
-import { connectDatabase } from './config/database.js'
 
 /**
  * Start the server
  */
 async function startServer(): Promise<void> {
   try {
-    // Connect to database
-    await connectDatabase()
-
     // Create Express app
     const app = createApp()
 

@@ -16,7 +16,6 @@ dotenv.config({ path: path.join(__dirname, '../../.env') })
 const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
   PORT: z.string().default('5000'),
-  MONGODB_URI: z.string().min(1, 'MONGODB_URI is required').default('mongodb://localhost:27017/lead-system'),
   JWT_SECRET: z.string().min(8, 'JWT_SECRET must be set').default('development-secret-key-change-me'),
   JWT_EXPIRES_IN: z.string().default('24h'),
   BCRYPT_SALT_ROUNDS: z.string().default('12'),
@@ -32,9 +31,6 @@ export const config = {
   },
   server: {
     port: Number(env.PORT),
-  },
-  database: {
-    mongoUri: env.MONGODB_URI,
   },
   jwt: {
     secret: env.JWT_SECRET,
