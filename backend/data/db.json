@@ -1,0 +1,234 @@
+{
+  "campaigns": [
+    {
+      "id": "11505b9f-8e4a-44c0-8251-815c86bb683e",
+      "name": "Campanha para Sorteio",
+      "description": "Campanha criada automaticamente para teste de leads e sorteio",
+      "isActive": true,
+      "createdAt": "2026-05-13T17:38:31.492Z",
+      "updatedAt": "2026-05-13T17:38:31.492Z"
+    }
+  ],
+  "leads": [
+    {
+      "id": "658d5bbd-69ed-4440-bace-6b0c174c921b",
+      "fullName": "Ana Clara Silva",
+      "whatsapp": "11031850874",
+      "instagram": "@anaclarasi",
+      "email": "ana.clara.silva@example.com",
+      "campaignId": "11505b9f-8e4a-44c0-8251-815c86bb683e",
+      "status": "new",
+      "createdAt": "2026-05-13T17:38:31.499Z",
+      "updatedAt": "2026-05-13T17:38:31.499Z"
+    },
+    {
+      "id": "d1d50af1-67a5-4feb-9cc9-10a5b5a2b16a",
+      "fullName": "Bruno Souza",
+      "whatsapp": "11256154295",
+      "instagram": "@brunosouza",
+      "email": "bruno.souza@example.com",
+      "campaignId": "11505b9f-8e4a-44c0-8251-815c86bb683e",
+      "status": "new",
+      "createdAt": "2026-05-13T17:38:31.500Z",
+      "updatedAt": "2026-05-13T17:38:31.500Z"
+    },
+    {
+      "id": "34d51c3b-0b0f-4376-b1e2-07c32c933aab",
+      "fullName": "Carla Pereira",
+      "whatsapp": "11610527884",
+      "instagram": "@carlaperei",
+      "email": "carla.pereira@example.com",
+      "campaignId": "11505b9f-8e4a-44c0-8251-815c86bb683e",
+      "status": "new",
+      "createdAt": "2026-05-13T17:38:31.502Z",
+      "updatedAt": "2026-05-13T17:38:31.502Z"
+    },
+    {
+      "id": "d663e566-ddf1-4d2d-bbd9-fa05e8b85eb7",
+      "fullName": "Diego Oliveira",
+      "whatsapp": "11859065366",
+      "instagram": "@diegoolive",
+      "email": "diego.oliveira@example.com",
+      "campaignId": "11505b9f-8e4a-44c0-8251-815c86bb683e",
+      "status": "new",
+      "createdAt": "2026-05-13T17:38:31.504Z",
+      "updatedAt": "2026-05-13T17:38:31.504Z"
+    },
+    {
+      "id": "bcb3813d-0b6a-4430-a358-7c83ca87124a",
+      "fullName": "Eduarda Costa",
+      "whatsapp": "11363738408",
+      "instagram": "@eduardacos",
+      "email": "eduarda.costa@example.com",
+      "campaignId": "11505b9f-8e4a-44c0-8251-815c86bb683e",
+      "status": "new",
+      "createdAt": "2026-05-13T17:38:31.505Z",
+      "updatedAt": "2026-05-13T17:38:31.505Z"
+    },
+    {
+      "id": "814a6e38-0a8e-45b8-84f3-86938da0163a",
+      "fullName": "Felipe Martins",
+      "whatsapp": "11193969504",
+      "instagram": "@felipemart",
+      "email": "felipe.martins@example.com",
+      "campaignId": "11505b9f-8e4a-44c0-8251-815c86bb683e",
+      "status": "new",
+      "createdAt": "2026-05-13T17:38:31.506Z",
+      "updatedAt": "2026-05-13T17:38:31.506Z"
+    },
+    {
+      "id": "de6669d1-3a6d-4992-aa08-01e5c2c3d1f3",
+      "fullName": "Gabriela Lima",
+      "whatsapp": "11260000812",
+      "instagram": "@gabrielali",
+      "email": "gabriela.lima@example.com",
+      "campaignId": "11505b9f-8e4a-44c0-8251-815c86bb683e",
+      "status": "new",
+      "createdAt": "2026-05-13T17:38:31.506Z",
+      "updatedAt": "2026-05-13T17:38:31.506Z"
+    },
+    {
+      "id": "035d41c2-d0ec-444f-b0da-b04532870be4",
+      "fullName": "Hugo Fernandes",
+      "whatsapp": "11653140051",
+      "instagram": "@hugofernan",
+      "email": "hugo.fernandes@example.com",
+      "campaignId": "11505b9f-8e4a-44c0-8251-815c86bb683e",
+      "status": "new",
+      "createdAt": "2026-05-13T17:38:31.507Z",
+      "updatedAt": "2026-05-13T17:38:31.507Z"
+    },
+    {
+      "id": "ad137f33-2efd-48f1-8e13-86c3d1c09595",
+      "fullName": "Isabela Rocha",
+      "whatsapp": "11482904004",
+      "instagram": "@isabelaroc",
+      "email": "isabela.rocha@example.com",
+      "campaignId": "11505b9f-8e4a-44c0-8251-815c86bb683e",
+      "status": "new",
+      "createdAt": "2026-05-13T17:38:31.508Z",
+      "updatedAt": "2026-05-13T17:38:31.508Z"
+    },
+    {
+      "id": "d137f00e-9eb3-4fe1-985c-66aa3cd57c2f",
+      "fullName": "João Victor",
+      "whatsapp": "11865192482",
+      "instagram": "@joovictor",
+      "email": "jo.o.victor@example.com",
+      "campaignId": "11505b9f-8e4a-44c0-8251-815c86bb683e",
+      "status": "new",
+      "createdAt": "2026-05-13T17:38:31.508Z",
+      "updatedAt": "2026-05-13T17:38:31.508Z"
+    },
+    {
+      "id": "bc0b7482-259c-4e9a-b56e-921f7c21d3cd",
+      "fullName": "Karina Ribeiro",
+      "whatsapp": "11110041248",
+      "instagram": "@karinaribe",
+      "email": "karina.ribeiro@example.com",
+      "campaignId": "11505b9f-8e4a-44c0-8251-815c86bb683e",
+      "status": "new",
+      "createdAt": "2026-05-13T17:38:31.509Z",
+      "updatedAt": "2026-05-13T17:38:31.509Z"
+    },
+    {
+      "id": "2725296f-9e35-4d70-95a3-3fc3303dae5c",
+      "fullName": "Lucas Almeida",
+      "whatsapp": "11226317695",
+      "instagram": "@lucasalmei",
+      "email": "lucas.almeida@example.com",
+      "campaignId": "11505b9f-8e4a-44c0-8251-815c86bb683e",
+      "status": "new",
+      "createdAt": "2026-05-13T17:38:31.509Z",
+      "updatedAt": "2026-05-13T17:38:31.509Z"
+    },
+    {
+      "id": "cd027419-d101-46b3-b3a6-0150ee147111",
+      "fullName": "Mariana Santos",
+      "whatsapp": "11942602267",
+      "instagram": "@marianasan",
+      "email": "mariana.santos@example.com",
+      "campaignId": "11505b9f-8e4a-44c0-8251-815c86bb683e",
+      "status": "new",
+      "createdAt": "2026-05-13T17:38:31.515Z",
+      "updatedAt": "2026-05-13T17:38:31.515Z"
+    },
+    {
+      "id": "f094dc44-4490-48f2-b776-b292e9430c1d",
+      "fullName": "Nicolas Carvalho",
+      "whatsapp": "11330787083",
+      "instagram": "@nicolascar",
+      "email": "nicolas.carvalho@example.com",
+      "campaignId": "11505b9f-8e4a-44c0-8251-815c86bb683e",
+      "status": "new",
+      "createdAt": "2026-05-13T17:38:31.516Z",
+      "updatedAt": "2026-05-13T17:38:31.516Z"
+    },
+    {
+      "id": "ef0b6f0a-4d9d-4e53-a76d-849a377c872f",
+      "fullName": "Olívia Nunes",
+      "whatsapp": "11385573252",
+      "instagram": "@olvianunes",
+      "email": "ol.via.nunes@example.com",
+      "campaignId": "11505b9f-8e4a-44c0-8251-815c86bb683e",
+      "status": "new",
+      "createdAt": "2026-05-13T17:38:31.517Z",
+      "updatedAt": "2026-05-13T17:38:31.517Z"
+    },
+    {
+      "id": "202199ce-8a36-4dc1-841d-458160275eff",
+      "fullName": "Pedro Azevedo",
+      "whatsapp": "11611010465",
+      "instagram": "@pedroazeve",
+      "email": "pedro.azevedo@example.com",
+      "campaignId": "11505b9f-8e4a-44c0-8251-815c86bb683e",
+      "status": "new",
+      "createdAt": "2026-05-13T17:38:31.518Z",
+      "updatedAt": "2026-05-13T17:38:31.518Z"
+    },
+    {
+      "id": "1c30d019-e419-48fd-a15a-34957ade2816",
+      "fullName": "Queila Barbosa",
+      "whatsapp": "11238920702",
+      "instagram": "@queilabarb",
+      "email": "queila.barbosa@example.com",
+      "campaignId": "11505b9f-8e4a-44c0-8251-815c86bb683e",
+      "status": "new",
+      "createdAt": "2026-05-13T17:38:31.519Z",
+      "updatedAt": "2026-05-13T17:38:31.519Z"
+    },
+    {
+      "id": "36f19110-ff74-49e9-a8ad-c2528f76a3e9",
+      "fullName": "Rafael Melo",
+      "whatsapp": "11095522968",
+      "instagram": "@rafaelmelo",
+      "email": "rafael.melo@example.com",
+      "campaignId": "11505b9f-8e4a-44c0-8251-815c86bb683e",
+      "status": "new",
+      "createdAt": "2026-05-13T17:38:31.520Z",
+      "updatedAt": "2026-05-13T17:38:31.520Z"
+    },
+    {
+      "id": "745a8667-7af4-4f0e-823b-7115dc995ead",
+      "fullName": "Sofia Duarte",
+      "whatsapp": "11224863809",
+      "instagram": "@sofiaduart",
+      "email": "sofia.duarte@example.com",
+      "campaignId": "11505b9f-8e4a-44c0-8251-815c86bb683e",
+      "status": "new",
+      "createdAt": "2026-05-13T17:38:31.521Z",
+      "updatedAt": "2026-05-13T17:38:31.521Z"
+    },
+    {
+      "id": "f3e67226-613f-4e14-8458-c996ef897154",
+      "fullName": "Thiago Gomes",
+      "whatsapp": "11666865423",
+      "instagram": "@thiagogome",
+      "email": "thiago.gomes@example.com",
+      "campaignId": "11505b9f-8e4a-44c0-8251-815c86bb683e",
+      "status": "new",
+      "createdAt": "2026-05-13T17:38:31.543Z",
+      "updatedAt": "2026-05-13T17:38:31.543Z"
+    }
+  ]
+}
