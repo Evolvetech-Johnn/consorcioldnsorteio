@@ -7,8 +7,10 @@ import express, { Express } from 'express'
 import cors from 'cors'
 import helmet from 'helmet'
 import 'express-async-errors'
-import config from './config/environment.js'
-import { errorHandler } from './middleware/errorHandler.js'
+import config from './config/environment'
+import { errorHandler } from './middleware/errorHandler'
+import leadRoutes from './routes/leadRoutes'
+import campaignRoutes from './routes/campaignRoutes'
 
 /**
  * Create and configure Express app
@@ -49,8 +51,9 @@ export function createApp(): Express {
     res.json({ status: 'OK', timestamp: new Date().toISOString() })
   })
 
-  // API routes will be mounted here
-  // Routes setup will be added in next phase
+  // API routes
+  app.use('/api/leads', leadRoutes)
+  app.use('/api/campaigns', campaignRoutes)
 
   // Error handling middleware (must be last)
   app.use(errorHandler)

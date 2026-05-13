@@ -3,14 +3,18 @@
  * Starts the Express server
  */
 
-import config from './config/environment.js'
-import { createApp } from './app.js'
+import config from './config/environment'
+import { createApp } from './app'
+import { connectToDatabase } from './config/database'
 
 /**
  * Start the server
  */
 async function startServer(): Promise<void> {
   try {
+    // Connect to MongoDB first
+    await connectToDatabase()
+
     // Create Express app
     const app = createApp()
 
@@ -18,7 +22,9 @@ async function startServer(): Promise<void> {
     const server = app.listen(config.server.port, () => {
       console.log(`\n✓ Server running on http://localhost:${config.server.port}`)
       console.log(`✓ Environment: ${config.node.env}`)
-      console.log(`✓ Health check: http://localhost:${config.server.port}/health\n`)
+      console.log(`✓ Health check: http://localhost:${config.server.port}/health`)
+      console.log(`✓ API Leads: http://localhost:${config.server.port}/api/leads`)
+      console.log(`✓ API Campaigns: http://localhost:${config.server.port}/api/campaigns\n`)
     })
 
     // Graceful shutdown

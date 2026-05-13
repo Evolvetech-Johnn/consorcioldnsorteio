@@ -3,9 +3,8 @@
   "version": "0.1.0",
   "description": "Lead Consortium Backend API",
   "main": "dist/server.js",
-  "type": "module",
   "scripts": {
-    "dev": "nodemon --exec ts-node -r tsconfig-paths/register --esm src/server.ts",
+    "dev": "nodemon --exec ts-node src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
     "lint": "eslint src --ext ts",

@@ -62,7 +62,7 @@ npm run lint
 - **Node.js** - Runtime
 - **Express** - Web framework
 - **TypeScript** - Type safety
-- **MongoDB** - Database with Mongoose ODM
+- **Local JSON storage** - Backend storage without MongoDB
 - **JWT** - Authentication
 - **Bcryptjs** - Password hashing
 - **Zod** - Validation
@@ -125,6 +125,8 @@ Routes → Controllers → Services → Models → Database
 ### Database
 
 MongoDB with Mongoose for schema validation and type safety.
+
+- In development, if `MONGODB_URI` is not configured, the backend now uses a local in-memory MongoDB instance automatically.
 
 ## 📚 Documentation
 
